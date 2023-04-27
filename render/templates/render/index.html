@@ -1,3 +1,6 @@
+{% load crispy_forms_tags %}
+
+
 <!doctype html>
 <html>
 <head>
@@ -6,8 +9,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+  <div class="w-full max-w-7xl mx-auto px-4">
+    <form method="post">
+      {% csrf_token %}
+
+      {{ form|crispy }}
+
+      <button type="submit" class="btn-blue"  value="Submit">Submit</button>
+    </form>
+  </div>
+
 </body>
 </html>
