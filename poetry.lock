@@ -156,6 +156,21 @@ files = [
 ]
 
 [[package]]
+name = "crispy-tailwind"
+version = "0.5.0"
+description = "A tailwind package for Django Crispy Forms"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "crispy-tailwind-0.5.0.tar.gz", hash = "sha256:0041c85b73b0a197e312ab969bd505aa1f96752a6a50324377287c2b6be3c0cb"},
+    {file = "crispy_tailwind-0.5.0-py3-none-any.whl", hash = "sha256:65cfcdf8dce96be37c99578e2688ed2d0067e6ff633baaf657358b3b3be052c7"},
+]
+
+[package.dependencies]
+django-crispy-forms = ">=1.11.2"
+
+[[package]]
 name = "dj-database-url"
 version = "0.5.0"
 description = "Use Database URLs in your Django Application."
@@ -187,6 +202,21 @@ sqlparse = ">=0.2.2"
 [package.extras]
 argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+
+[[package]]
+name = "django-crispy-forms"
+version = "2.0"
+description = "Best way to have Django DRY forms"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-crispy-forms-2.0.tar.gz", hash = "sha256:90193b068bf948d9c68449bc8260afed1a8e2afe11ee0bac8c4ebfaeb175b322"},
+    {file = "django_crispy_forms-2.0-py3-none-any.whl", hash = "sha256:d1d4e585929058a9ab3b797666ea5b69320b9ba7937f9d146d32173246a6fd13"},
+]
+
+[package.dependencies]
+django = ">=3.2"
 
 [[package]]
 name = "gunicorn"
@@ -490,4 +520,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "a91f8d3671a9d866dfbc856054f8143f12f70acc0e07768d193dbd22fd9a2415"
+content-hash = "b4a351468ee1f153a8d42dfcfe4bbbd58bdc65bd96866303f438639f3288720b"
