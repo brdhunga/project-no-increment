@@ -18,8 +18,8 @@ class ProjectCreateForm(ModelForm):
         fields = ("project_name", "template")
 
 
-def index(request):
-    return render(request, 'index.html', {'form': TaskForm()})
+def index(request: HttpRequest) -> HttpResponse:
+    return HttpResponseRedirect("/create-project")
 
 
 def create_project(request: HttpRequest) -> HttpResponse:

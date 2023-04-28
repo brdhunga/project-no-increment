@@ -14,6 +14,10 @@ import os
 from pathlib import Path
 
 import dj_database_url
+from dotenv import load_dotenv
+from loguru import logger
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,8 +30,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET', "dfdfdfdfdf")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('ENVIRONMENT', True) in ['Local', 'LOCAL']
-DEBUG = True
+DEBUG = os.environ.get('ENVIRONMENT', False) in ['Local', 'LOCAL']
+logger.info(f"DEBUG is {DEBUG}")
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['localhost', "project-increment.onrender.com"]
@@ -89,6 +93,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 if DEBUG:
+    logger.info("Using sqlite")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -96,6 +101,7 @@ if DEBUG:
         }
     }
 else:
+    logger.info("Using postgres")
     DATABASES = {
         'default': dj_database_url.config(
             default=os.environ['POSTGRES_URL'],

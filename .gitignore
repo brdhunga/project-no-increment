@@ -144,3 +144,4 @@ cython_debug/
 /staticfiles
 .idea/
 db.sqlite3
+.env
