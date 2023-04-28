@@ -17,24 +17,27 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-4">#</th>
                                     <th scope="col" class="px-6 py-4">Project Name</th>
-                                    <th scope="col" class="px-6 py-4">Last Project Number</th>
-                                    <th scope="col" class="px-6 py-4">Last Project Update</th>
+                                    <th scope="col" class="px-6 py-4">Latest Project Number</th>
+                                    <th scope="col" class="px-6 py-4">Latest Project Update</th>
                                     <th scope="col" class="px-6 py-4"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="border-b dark:border-neutral-500">
-                                    <td class="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                                    <td class="whitespace-nowrap px-6 py-4">Mark</td>
-                                    <td class="whitespace-nowrap px-6 py-4">Otto</td>
-                                    <td class="whitespace-nowrap px-6 py-4">@mdo</td>
-                                    <td class="whitespace-nowrap px-6 py-4">
-                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                            Increase
-                                        </button>
+                                {% for project in projects %}
+                                    <tr class="border-b dark:border-neutral-500">
+                                        <td class="whitespace-nowrap px-6 py-4 font-medium">{{ forloop.counter }}</td>
+                                        <td class="whitespace-nowrap px-6 py-4">{{ project.project_name }}</td>
+                                        <td class="whitespace-nowrap px-6 py-4">{{ project.project_version }}</td>
+                                        <td class="whitespace-nowrap px-6 py-4">{{ project.project_version_datetime }}</td>
+                                        <td class="whitespace-nowrap px-6 py-4">
+                                            <a  href={% url 'project_increment' project_no=project.project_no %} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                Increase
+                                            </a>
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                {%  endfor %}
+
                                 </tbody>
                             </table>
                         </div>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from loguru import logger
 
 
 class Task(models.Model):
@@ -8,11 +9,16 @@ class Task(models.Model):
 
 
 class Project(models.Model):
-    project_name = models.CharField(max_length=250) #, help_text="Enter a name for the project")
+    project_name = models.CharField(max_length=250)
     template = models.CharField(max_length=250, choices=[('A', 'A'), ('B', 'B')])
 
     def __str__(self):
         return self.project_name
+
+    def save(self, *args, **kwargs):
+        # ProjectVersion.objects.create(project=self, version=f"{self.template}-{0}").save()
+        # logger.info("Project and ProjectVersion created")
+        super(Project, self).save(*args, **kwargs)
 
 
 class ProjectVersion(models.Model):

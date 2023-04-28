@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('create-project/', create_project),
     path('all-projects/', all_projects),
-    path("increment/<int:project_no>/", increase_project_version),
+    path("increment/<int:project_no>/", increase_project_version, name="project_increment"),
     path('', include('render.urls'))
 ]
