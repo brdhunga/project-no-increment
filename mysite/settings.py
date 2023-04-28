@@ -17,10 +17,11 @@ import dj_database_url
 from dotenv import load_dotenv
 from loguru import logger
 
-load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+load_dotenv(dotenv_path=Path(BASE_DIR) / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,6 +33,7 @@ SECRET_KEY = os.environ.get('SECRET', "dfdfdfdfdf")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('ENVIRONMENT', False) in ['Local', 'LOCAL']
 logger.info(f"DEBUG is {DEBUG}")
+DEBUG=True
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['localhost', "project-increment.onrender.com"]
@@ -39,7 +41,7 @@ ALLOWED_HOSTS = ['localhost', "project-increment.onrender.com"]
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -53,7 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "crispy_forms",  # new
     "crispy_tailwind",  # new
-    "django_tables2"
+    "django_tables2",
+    "users",
 
 ]
 
@@ -92,22 +95,21 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if DEBUG:
-    logger.info("Using sqlite")
+try:
+    logger.info("Using postgres")
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ['POSTGRES_URL'],
+            conn_max_age=600
+        )
+    }
+except KeyError:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': Path(BASE_DIR) / 'db.sqlite3',
         }
     }
-else:
-    logger.info("Using postgres")
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ['POSTGRES_URL'],
-            conn_max_age=600
-    )
-}
 
 
 # Password validation
@@ -154,3 +156,5 @@ if not DEBUG:
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
+
+AUTH_USER_MODEL = "users.CustomUser"
