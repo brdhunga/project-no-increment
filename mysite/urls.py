@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from render.views import create_project, all_projects, increase_project_version
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('create-project/', create_project),
+    path('all-projects/', all_projects),
+    path("increment/<int:project_no>/", increase_project_version    ),
     path('', include('render.urls'))
 ]
