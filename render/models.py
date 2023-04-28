@@ -21,4 +21,4 @@ class ProjectVersion(models.Model):
     version = models.CharField(max_length=100, default="", null=True)
 
     def __str__(self):
-        return f"Project version for {self.project}"
+        return f"Project version {self.version} for {self.project}"
