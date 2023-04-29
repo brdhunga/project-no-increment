@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from render.views import create_project, all_projects, increase_project_version
 
+from render.apis import api
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('create-project/', create_project),
     path('all-projects/', all_projects),
     path("increment/<int:project_no>/", increase_project_version, name="project_increment"),
-    path('', include('render.urls'))
+    path('', include('render.urls')),
+    path("api/", api.urls),
 ]
