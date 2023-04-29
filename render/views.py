@@ -1,8 +1,9 @@
+from django import forms
 from django.db import transaction
 from django.forms import ModelForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from render.models import Task, Project, ProjectVersion
+from render.models import Task, Project, ProjectVersion, ProjectTemplate
 
 
 class TaskForm(ModelForm):
@@ -13,13 +14,15 @@ class TaskForm(ModelForm):
 
 
 class ProjectCreateForm(ModelForm):
+    template = forms.ModelChoiceField(queryset=ProjectTemplate.objects.all(), empty_label="(Nothing)")
+
     class Meta:
         model = Project
         fields = ("project_name", "template")
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return HttpResponseRedirect("/create-project")
+    return render(request, 'index.html', {"disable_create_button": True})
 
 
 def create_project(request: HttpRequest) -> HttpResponse:

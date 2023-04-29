@@ -104,6 +104,7 @@ try:
         )
     }
 except KeyError:
+    logger.info("Using sqlite")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

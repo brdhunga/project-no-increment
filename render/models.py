@@ -7,9 +7,17 @@ class Task(models.Model):
     due_date = models.DateField(default=timezone.now)
 
 
+class ProjectTemplate(models.Model):
+    template = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.template
+
+
 class Project(models.Model):
     project_name = models.CharField(max_length=250)
-    template = models.CharField(max_length=250, choices=[('A', 'A'), ('B', 'B')])
+    template = models.CharField(max_length=250
+                                , null=True, blank=True)
 
     def __str__(self):
         return self.project_name

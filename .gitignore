@@ -143,6 +143,5 @@ cython_debug/
 # WhiteNoise
 /staticfiles
 .idea/
-db.sqlite3
-.env
 pyrightconfig.json
+.env1
